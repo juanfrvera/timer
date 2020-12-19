@@ -1,20 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div id="timer">
+      <div id="minutes">{{timer.minutes}}</div>
+      <div id="separator">:</div>
+      <div id="seconds">{{timer.seconds}}</div>
+    </div>
+    <h2>Main time</h2>
+    <ion-item class="config-input">
+      <ion-label position="stacked">Minutes</ion-label>
+      <ion-input [(ngModel)]="main.minutes" (ionChange)="mainChanged()" type="numeric"></ion-input>
+    </ion-item>
+    <ion-item class="config-input">
+      <ion-label position="stacked">Seconds</ion-label>
+      <ion-input [(ngModel)]="main.seconds" (ionChange)="mainChanged()"></ion-input>
+    </ion-item>
+    <h2>Rest time</h2>
+    <ion-item class="config-input">
+      <ion-label position="stacked">Minutes</ion-label>
+      <ion-input [(ngModel)]="rest.minutes" (ionChange)="restChanged()"></ion-input>
+    </ion-item>
+    <ion-item class="config-input">
+      <ion-label position="stacked">Seconds</ion-label>
+      <ion-input [(ngModel)]="rest.seconds" (ionChange)="restChanged()"></ion-input>
+    </ion-item>
+    <h2>Settings</h2>
+    <ion-item>
+      <ion-label>Sound</ion-label>
+      <ion-select placeholder="Select One" value="{{currentNotification}}" (ionChange)="soundChanged($event)">
+        <ion-select-option value="none">None</ion-select-option>
+        <ion-select-option *ngFor="let notif of notifications" value="{{notif}}">
+          {{notif}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Show on title</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="showOnTitle" (ionChange)="showOnTitleChanged()"></ion-checkbox>
+    </ion-item>
   </div>
 </ion-content>
